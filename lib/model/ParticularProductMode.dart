@@ -1,33 +1,4 @@
-class ProductModel {
-  List<Products>? products;
-  int? total;
-  int? skip;
-  int? limit;
-
-  ProductModel({this.products, this.total, this.skip, this.limit});
-
-  fromJson(Map<String, dynamic> json) {
-    products = json["products"] == null
-        ? null
-        : (json["products"] as List).map((e) => Products.fromJson(e)).toList();
-    total = json["total"];
-    skip = json["skip"];
-    limit = json["limit"];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    if (products != null) {
-      _data["products"] = products?.map((e) => e.toJson()).toList();
-    }
-    _data["total"] = total;
-    _data["skip"] = skip;
-    _data["limit"] = limit;
-    return _data;
-  }
-}
-
-class Products {
+class ParticularProductMode {
   int? id;
   String? title;
   String? description;
@@ -40,7 +11,7 @@ class Products {
   String? thumbnail;
   List<String>? images;
 
-  Products(
+  ParticularProductMode(
       {this.id,
       this.title,
       this.description,
@@ -53,13 +24,13 @@ class Products {
       this.thumbnail,
       this.images});
 
-  Products.fromJson(Map<String, dynamic> json) {
+  ParticularProductMode.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     title = json["title"];
     description = json["description"];
     price = json["price"];
     discountPercentage = json["discountPercentage"];
-    rating = json["rating"].toDouble();
+    rating = json["rating"];
     stock = json["stock"];
     brand = json["brand"];
     category = json["category"];

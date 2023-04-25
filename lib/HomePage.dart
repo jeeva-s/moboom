@@ -1,16 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moboom1/functions/GetProduct.dart';
-import 'package:moboom1/model/ParticularProductModel.dart';
+import 'package:moboom1/model/ParticularProductMode.dart';
+
 import 'package:moboom1/model/ProductModel.dart';
+
 import 'package:moboom1/styles/colors.dart';
 import 'package:moboom1/styles/resposiveWebMobil.dart';
 import 'package:moboom1/styles/spaceWidget.dart';
 import 'package:moboom1/styles/textStyle.dart';
+import 'package:postgres/postgres.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -23,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController controller = TextEditingController();
   List<String> categoryList = ["All category"];
   ProductModel model = ProductModel();
-  GetProduct _getProduct = GetProduct();
+  final GetProduct _getProduct = GetProduct();
   late String category;
   int finalproduct = 0;
   int productlength = 0;
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     category = categoryList.first;
-    // getLimitedProduct();
+
     controller.addListener(
       () {
         if (controller.text.isEmpty && category == "All category") {
@@ -98,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                           bottom: 16,
                           right: 32,
                         ),
-                        child: Container(
+                        child: SizedBox(
                           width: dSize.width,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -203,9 +204,13 @@ class _HomePageState extends State<HomePage> {
                                       onChanged: (_) {
                                         setState(() {
                                           category = _!;
+                                          productlength = 0;
+                                          finalproduct = 0;
+
                                           if (category == "All category") {
                                             getproduct();
                                           } else {
+                                            print("test :hello");
                                             _getProduct
                                                 .getProduct(
                                                     url:
@@ -226,7 +231,6 @@ class _HomePageState extends State<HomePage> {
                             ),
                       gapH12,
                       Container(
-                        // height: 100,
                         width: dSize.width,
                         decoration: BoxDecoration(
                             color: Colors.grey.shade900,
@@ -284,6 +288,8 @@ class _HomePageState extends State<HomePage> {
                                     onChanged: (_) {
                                       setState(() {
                                         controller.clear();
+                                        productlength = 0;
+                                        finalproduct = 0;
                                         category = _!;
                                         if (category == "All category") {
                                           getproduct();
@@ -696,20 +702,4 @@ class _HomePageState extends State<HomePage> {
       print("product get error : $e");
     });
   }
-
-  // void getLimitedProduct() async {
-  //   ParticularProductModel products = ParticularProductModel();
-  //   List t = [];
-
-  //   for (int i = 1; i < 7; i++) {
-  //     await _getProduct
-  //         .getProduct(url: "https://dummyjson.com/products/$i")
-  //         .then((value) {
-
-  //     }).catchError((e) {});
-  //   }
-
-  //   // Products products = Products();
-  //   // products.fromJson()
-  // }
 }
