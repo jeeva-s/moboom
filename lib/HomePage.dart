@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:moboom1/functions/GetProduct.dart';
-import 'package:moboom1/model/ParticularProductMode.dart';
+
 
 import 'package:moboom1/model/ProductModel.dart';
 
@@ -11,7 +11,7 @@ import 'package:moboom1/styles/colors.dart';
 import 'package:moboom1/styles/resposiveWebMobil.dart';
 import 'package:moboom1/styles/spaceWidget.dart';
 import 'package:moboom1/styles/textStyle.dart';
-import 'package:postgres/postgres.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
